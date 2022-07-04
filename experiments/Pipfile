@@ -1,0 +1,37 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+sklearn = "*"
+jupyter = "*"
+install = "*"
+pandas-profiling = "*"
+lightgbm = "*"
+xgboost = "*"
+tensorflow-probability = "*"
+fredapi = "*"
+greykite = "*"
+holidays = "*"
+numexpr = "*"
+bottleneck = "*"
+yfinance = "*"
+autots = "*"
+requests = "*"
+psutil = "*"
+mxnet = "*"
+gluonts = "*"
+prophet = "*"
+arch = "*"
+tensorflow-cpu = "*"
+neuralprophet = "*"
+pytorch-forecasting = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
