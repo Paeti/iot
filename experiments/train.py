@@ -83,12 +83,13 @@ def save_autots_model_results_per_junction(autots_model_junction_key_list):
 
 
 def train_models_per_junction(data_grouped_by_junction, autots_param_dict):
-    autots_model = AutoTS(**autots_param_dict)
     result_model_junction_key_list = []
     
     for key, group in data_grouped_by_junction:
         group.drop(["Junction"], axis=1, inplace=True)
         group["Vehicles"] = group["Vehicles"].astype(float)
+
+        autots_model = AutoTS(**autots_param_dict)
 
         junction_resulting_model = autots_model.fit(group)
         
