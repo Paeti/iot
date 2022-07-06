@@ -26,6 +26,7 @@ prophet = "*"
 arch = "*"
 neuralprophet = "*"
 pytorch-forecasting = "*"
+tensorflow = "*"
 
 [dev-packages]
 
