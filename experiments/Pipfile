@@ -27,6 +27,9 @@ arch = "*"
 neuralprophet = "*"
 pytorch-forecasting = "*"
 tensorflow = "*"
+torch = "*"
+torchvision = "*"
+torchaudio = "*"
 
 [dev-packages]
 
