@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 numpy = "*"
 pandas = "*"
+matplotlib = "*"
 sklearn = "*"
+jupyter = "*"
 install = "*"
+pandas-profiling = "*"
 lightgbm = "*"
 xgboost = "*"
 tensorflow-probability = "*"
@@ -24,10 +27,11 @@ mxnet = "*"
 gluonts = "*"
 prophet = "*"
 arch = "*"
+tensorflow-cpu = "*"
 neuralprophet = "*"
 pytorch-forecasting = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
