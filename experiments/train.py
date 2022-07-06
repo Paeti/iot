@@ -118,12 +118,13 @@ if __name__ == "__main__":
         "model_list": "all",
         "transformer_list": "all",
         "models_to_validate": 0.35,
-        "max_generations": 7,
+        "max_generations": 10,
         "num_validations": 5,
         "validation_method": "backwards",
         "n_jobs": 4,
         "no_negatives": True,
         "holiday_country": "US",
+        "current_model_file": "./model_rescue",
     }
 
     resulting_models = train_models_per_junction(
