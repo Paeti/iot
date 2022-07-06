@@ -2,6 +2,7 @@ import os
 import shutil
 import pandas as pd
 import numpy as np
+import pickle
 
 from datetime import date
 from autots import AutoTS
@@ -111,16 +112,16 @@ if __name__ == "__main__":
 
     autots_param_dict = {
         "forecast_length": 5,
-        "frequency": 'infer',
+        "frequency": "H",
         "prediction_interval": 0.9,
         "ensemble": None,
-        "model_list": "superfast",
-        "transformer_list": "superfast",
-        "models_to_validate": 0.2,
+        "model_list": "all",
+        "transformer_list": "all",
+        "models_to_validate": 0.35,
         "max_generations": 7,
         "num_validations": 5,
         "validation_method": "backwards",
-        "n_jobs": 2,
+        "n_jobs": 4,
         "no_negatives": True,
         "holiday_country": "US",
     }
