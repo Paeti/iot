@@ -115,7 +115,7 @@ if __name__ == "__main__":
         "frequency": "H",
         "prediction_interval": 0.9,
         "ensemble": None,
-        "model_list": "all",
+        "model_list": ["DatepartRegression"],
         "transformer_list": "all",
         "models_to_validate": 0.35,
         "max_generations": 10,
