@@ -1,8 +1,10 @@
 #!/bin/bash
 
+sudo systemctl stop unattended-upgrades
+
 sudo apt update -y
 sudo apt install software-properties-common -y
-sudo apt remove unattended-upgrades
+sudo apt remove unattended-upgrades -y
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt install python3.8 -y 
 
@@ -24,3 +26,5 @@ export PATH="/home/ubuntu/.local/bin:$PATH"
 
 sudo rm /usr/local/cuda
 sudo ln -s /usr/local/cuda-11.0 /usr/local/cuda
+
+pipenv install -v
