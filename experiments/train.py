@@ -88,7 +88,7 @@ def train_models_per_junction(data_grouped_by_junction, autots_param_dict):
     
     for key, group in data_grouped_by_junction:
         group.drop(["Junction"], axis=1, inplace=True)
-        group["Vehicles"] = group["Vehicles"].astype(float)
+        group["Vehicles"] = group["Vehicles"].astype("float64")
 
         autots_model = AutoTS(**autots_param_dict)
 
@@ -115,7 +115,7 @@ if __name__ == "__main__":
         "frequency": "H",
         "prediction_interval": 0.9,
         "ensemble": None,
-        "model_list": ["DatepartRegression"],
+        "model_list": ["Greykite"],
         "transformer_list": "all",
         "models_to_validate": 0.35,
         "max_generations": 10,
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         "validation_method": "backwards",
         "n_jobs": 4,
         "no_negatives": True,
-        "holiday_country": "US",
+        "holiday_country": "UnitedStates",
         "current_model_file": "./model_rescue",
     }
 

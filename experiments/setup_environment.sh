@@ -1,5 +1,10 @@
 #!/bin/bash
 
+sudo systemctl stop apt-daily.timer
+sudo systemctl stop apt-daily.service
+sudo systemctl stop apt-daily-upgrade.timer
+sudo systemctl stop apt-daily-upgrade.service
+
 sudo systemctl stop unattended-upgrades
 
 sudo apt update -y
