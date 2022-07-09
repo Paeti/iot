@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo pkill --signal SIGKILL unattended-upgrades
+sudo systemctl kill --kill-who=all unattended-upgrades.service
 sudo systemctl stop unattended-upgrades.service
 sudo systemctl disable unattended-upgrades.service
 
