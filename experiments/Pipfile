@@ -35,6 +35,7 @@ torchaudio = "*"
 pytorch-forecasting = "*"
 neuralprophet = "*"
 autots = "*"
+torchmetrics = "==0.8.2"
 
 [dev-packages]
 
