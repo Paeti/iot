@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7a0717acc30f053e6e419a59d813d445b69f33dd891ad94eadbb604a1a575d11"
+            "sha256": "0271ef4708651becb0897e481fe9b9b45b9a578b3d6ba8704f21db84d1d3d10a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1916,6 +1916,13 @@
             "markers": "python_version >= '3.5'",
             "version": "==1.6.4"
         },
+        "prophet": {
+            "hashes": [
+                "sha256:e02c5e5496ef7d69f510a0c560d92f517aae24ed9ae3289cfaa8ac552286a842"
+            ],
+            "index": "pypi",
+            "version": "==1.0"
+        },
         "protobuf": {
             "hashes": [
                 "sha256:072fbc78d705d3edc7ccac58a62c4c8e0cec856987da7df8aca86e647be4e35c",
@@ -2483,6 +2490,13 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==59.5.0"
+        },
+        "setuptools-git": {
+            "hashes": [
+                "sha256:e7764dccce7d97b4b5a330d7b966aac6f9ac026385743fd6cedad553f2494cfa",
+                "sha256:ff64136da01aabba76ae88b050e7197918d8b2139ccbf6144e14d472b9c40445"
+            ],
+            "version": "==1.2"
         },
         "six": {
             "hashes": [

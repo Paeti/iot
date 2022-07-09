@@ -15,10 +15,12 @@ sudo apt install software-properties-common -y
 sudo apt remove unattended-upgrades -y
 
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-sudo apt install gcc-9 -y
+sudo apt install gcc-9 g++-9 -y
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 20
 
 sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt install python3.8 -y 
+sudo apt install python3.8 python3.8-dev -y
 
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 20
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 20
