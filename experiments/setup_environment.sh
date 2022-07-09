@@ -1,15 +1,16 @@
 #!/bin/bash
 
+sudo systemctl stop unattended-upgrades.service
+
+sudo apt update -y
+sudo apt remove unattended-upgrades -y
+
 sudo systemctl stop apt-daily.timer
 sudo systemctl stop apt-daily.service
 sudo systemctl stop apt-daily-upgrade.timer
 sudo systemctl stop apt-daily-upgrade.service
 
-sudo systemctl stop unattended-upgrades
-
-sudo apt update -y
 sudo apt install software-properties-common -y
-sudo apt remove unattended-upgrades -y
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt install python3.8 -y 
 
