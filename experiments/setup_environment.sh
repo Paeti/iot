@@ -41,7 +41,7 @@ apt autoremove -y
 apt autoclean -y
 apt install python3-apt -y
 
-export PATH="/home/ubuntu/.local/bin:$PATH"
+#export PATH="/home/ubuntu/.local/bin:$PATH"
 
 # sudo apt install pyton3-pip -y
 # python3 -m pip install --user pipenv

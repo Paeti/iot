@@ -39,9 +39,9 @@ build {
     inline = [
       "git clone git@github.com:Paeti/iot.git",
       "cd /home/ubuntu/iot/experiments",
-      "sleep 20",
       "sudo chmod u+x /home/ubuntu/iot/experiments/setup_environment.sh",
-      "sudo . /home/ubuntu/iot/experiments/setup_environment.sh >> log.txt",
+      "sudo bash /home/ubuntu/iot/experiments/setup_environment.sh",
+      "export PATH=\"/home/ubuntu/.local/bin:$PATH\"",
       "python3 -m pip install --user pipenv",
       "pipenv install -v"
     ]
