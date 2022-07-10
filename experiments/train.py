@@ -83,6 +83,33 @@ def save_autots_model_results_per_junction(autots_model_junction_key_list):
             pickle.dump((model, key), f)
 
 
+def save_best_model_per_junctions_backforecast(
+    best_model_junction_num_tuple_list,
+    time_series_data,
+):
+    
+    time_series_data_groups = time_series_data.groupby(["Junction"])
+
+    
+    for model, junction_num in best_model_junction_num_tuple_list:
+        filename = ("junction_{0}_best_trained_model_junction_"       
+                    "backforecast.csv").format(junction_num)
+        
+        working_directory =os.getcwd()
+        base_path = "results_per_junction/junction_{0}/autots_model".format(junction_num)
+        
+        complete_path = "/".join([working_directory, base_path, filename])
+        
+        junction_data = time_series_data_groups.get_group(junction_num)["Vehicles"]
+        
+        junction_backforecast = model.back_forecast(
+            column = "Vehicles",
+            n_splits = "auto",
+        ).forecast
+        
+        junction_backforecast.to_csv(complete_path)
+
+
 def train_models_per_junction(data_grouped_by_junction, autots_param_dict):
     result_model_junction_key_list = []
     
@@ -110,22 +137,47 @@ if __name__ == "__main__":
     data.drop(["ID"], axis=1, inplace=True)
     data_grouped_by_junction = data.groupby(by="Junction")
 
+    model_list = [
+        "DatepartRegression",
+        "GluonTS",
+        "MotifSimulation",
+        "Greykite",
+        "PytorchForecasting",
+        "ARCH",
+        "NeuralProphet",
+        "NVAR",
+        "SectionalMotif",
+        "UnivariateMotif",
+        "UnivariateRegression",
+        "WindowRegression",
+        "RollingRegression",
+        "ARDL",
+        "Theta",
+        "ARIMA",
+        "ETS",
+        "UnobservedComponents",
+        "GLS",
+        "GLM",
+    ]
+
     autots_param_dict = {
         "forecast_length": 5,
         "frequency": "H",
         "prediction_interval": 0.9,
         "ensemble": None,
-        "model_list": ["Greykite"],
+        "model_list": model_list,
         "transformer_list": "all",
         "models_to_validate": 0.35,
-        "max_generations": 10,
+        "max_generations": 15,
         "num_validations": 5,
         "validation_method": "backwards",
-        "n_jobs": 4,
+        "n_jobs": 8,
         "no_negatives": True,
-        "holiday_country": "UnitedStates",
+        "holiday_country": "US",
         "current_model_file": "./model_rescue",
     }
+
+    cleanup_filesystem()
 
     resulting_models = train_models_per_junction(
             data_grouped_by_junction, 
@@ -134,3 +186,4 @@ if __name__ == "__main__":
 
     prepare_filesystem_for_saving_results()
     save_autots_model_results_per_junction(resulting_models)
+    save_best_model_per_junctions_backforecast(resulting_models, data)

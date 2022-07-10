@@ -15,7 +15,7 @@ source "amazon-ebs" "select-profile" {
 
 
 source "amazon-ebs" "ubuntu-dlami" {
-  ami_name                     = "aws-dlami-autots"
+  ami_name                     = "aws-dlami-autots-reworked"
   instance_type                = "p3.2xlarge"
   region                       = "eu-west-1"
   source_ami                   = "ami-0cd454db24da5cb9b"
