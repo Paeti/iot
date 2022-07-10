@@ -9,16 +9,16 @@ packer {
 
 
 source "amazon-ebs" "select-profile" {
-  profile = "default"
-  region  = "eu-central-1"
+  profile = "rosetta-hub"
+  region  = "eu-west-1"
 }
 
 
 source "amazon-ebs" "ubuntu-dlami" {
   ami_name                     = "aws-dlami-autots"
   instance_type                = "p3.2xlarge"
-  region                       = "eu-central-1"
-  source_ami                   = "ami-0f6529b0e4b7ddfdb"
+  region                       = "eu-west-1"
+  source_ami                   = "ami-0cd454db24da5cb9b"
   ssh_username                 = "ubuntu"
   communicator                 = "ssh"
   ssh_disable_agent_forwarding = false
@@ -37,10 +37,10 @@ build {
 
   provisioner "shell" {
     inline = [
-      "git config --global user.email \"patrick.reckeweg@googlemail.com\"",
       "git clone git@github.com:Paeti/iot.git",
-      "cd iot/experiments",
-      ". ./setup_environment.sh",
+      "cd /home/ubuntu/iot/experiments",
+      "touch i_was_here.txt",
+      "source ./setup_environment.sh >> log.txt",
     ]
   }
 

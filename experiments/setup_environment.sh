@@ -1,14 +1,21 @@
 #!/bin/bash
 
-sudo pkill --signal SIGKILL unattended-upgrades
-sudo systemctl kill --kill-who=all unattended-upgrades.service
-sudo systemctl stop unattended-upgrades.service
-sudo systemctl disable unattended-upgrades.service
+echo "started"
 
-sudo systemctl stop apt-daily.timer
-sudo systemctl stop apt-daily.service
-sudo systemctl stop apt-daily-upgrade.timer
-sudo systemctl stop apt-daily-upgrade.service
+sudo pkill --signal SIGKILL unattended-upgrades
+
+echo "command 1"
+
+#sudo systemctl kill --kill-who=all unattended-upgrades.service
+sudo systemctl stop unattended-upgrades
+#sudo systemctl disable unattended-upgrades.service
+
+echo "command 2"
+
+#sudo systemctl stop apt-daily.timer
+#sudo systemctl stop apt-daily.service
+#sudo systemctl stop apt-daily-upgrade.timer
+#sudo systemctl stop apt-daily-upgrade.service
 
 sudo apt update -y
 
