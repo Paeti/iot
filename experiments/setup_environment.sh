@@ -3,12 +3,14 @@
 echo "started"
 
 pkill --signal SIGKILL unattended-upgrades
+ps -A | grep unattended-upgrades | awk '{print $1}' | xargs -r kill -15 $1
+killall apt apt-get
 
 echo "command 1"
 
 #sudo systemctl kill --kill-who=all unattended-upgrades.service
-systemctl stop unattended-upgrades
-#sudo systemctl disable unattended-upgrades.service
+systemctl stop unattended-upgrades.service
+systemctl disable unattended-upgrades.service
 
 echo "command 2"
 
@@ -19,8 +21,11 @@ echo "command 2"
 
 apt update -y
 
+killall apt apt-get
+
+apt purge unattended-upgrades -y
 apt install software-properties-common -y
-apt remove unattended-upgrades -y
+#apt remove unattended-upgrades -y
 
 add-apt-repository ppa:ubuntu-toolchain-r/test -y
 apt install gcc-9 g++-9 -y
