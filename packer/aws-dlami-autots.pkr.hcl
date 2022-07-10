@@ -39,8 +39,7 @@ build {
     inline = [
       "git clone git@github.com:Paeti/iot.git",
       "cd /home/ubuntu/iot/experiments",
-      "touch i_was_here.txt",
-      "source ./setup_environment.sh >> log.txt",
+      ". /home/ubuntu/iot/experiments/setup_environment.sh",
     ]
   }
 
