@@ -1,5 +1,5 @@
 variable "availability_zone" {
-  default = "eu-west-1a"
+  default = "eu-west-1c"
 }
 
 variable "contact" {
@@ -11,7 +11,7 @@ variable "environment" {
 }
 
 variable "instance_type" {
-  default = "p2.xlarge"
+  default = "p3.2xlarge"
 }
 
 variable "service" {

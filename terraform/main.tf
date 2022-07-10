@@ -1,6 +1,6 @@
 provider "aws" {
   region  = "eu-west-1"
-  profile = "terraform"
+  profile = "rosetta-hub"
 }
 
 
@@ -59,18 +59,23 @@ resource "aws_security_group" "jupyter" {
 }
 
 resource "aws_instance" "jupyter" {
-  ami                    = "ami-0cd454db24da5cb9b"
+  ami                    = "ami-0723eb8fc61e89bfa"
   availability_zone      = "${var.availability_zone}"
   instance_type          = "${var.instance_type}"
   key_name               = "${aws_key_pair.generated_key.key_name}"
   vpc_security_group_ids = ["${aws_security_group.jupyter.id}"]
-  user_data              = "${file("script.sh")}"
+#  user_data              = "${file("script.sh")}"
   tags = {
     Name        = "${title(var.service)}-${timestamp()}"
     Service     = "${title(var.service)}"
     Contact     = "${var.contact}"
     Environment = "${title(lower(var.environment))}"
     Terraform   = "true"
+  }
+
+  root_block_device {
+    volume_size           = "60"
+    volume_type           = "gp2"
   }
   
   volume_tags = {
@@ -83,24 +88,24 @@ resource "aws_instance" "jupyter" {
   
 }
 
-resource "aws_ebs_volume" "jupyter" {
-  availability_zone = "${var.availability_zone}"
-  size              = 40
-  type              = "gp2"
-  tags = {
-    Name        = "${title(var.service)}-${timestamp()}_Anaconda3"
-    Service     = "${var.service}"
-    Contact     = "${var.contact}"
-    Environment = "${title(lower(var.environment))}"
-    Terraform   = "true"
-  }
-}
-resource "aws_volume_attachment" "jupyter" {
-  device_name  = "/dev/sdd"
-  instance_id  = "${aws_instance.jupyter.id}"
-  volume_id    = "${aws_ebs_volume.jupyter.id}"
-  force_detach = true
-}
+#resource "aws_ebs_volume" "jupyter" {
+#  availability_zone = "${var.availability_zone}"
+#  size              = 40
+#  type              = "gp2"
+#  tags = {
+#    Name        = "${title(var.service)}-${timestamp()}_Anaconda3"
+#    Service     = "${var.service}"
+#    Contact     = "${var.contact}"
+#    Environment = "${title(lower(var.environment))}"
+#    Terraform   = "true"
+#  }
+#}
+#resource "aws_volume_attachment" "jupyter" {
+#  device_name  = "/dev/sdd"
+#  instance_id  = "${aws_instance.jupyter.id}"
+#  volume_id    = "${aws_ebs_volume.jupyter.id}"
+#  force_detach = true
+#}
 
 terraform {
   backend "local" {
