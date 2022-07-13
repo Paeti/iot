@@ -16,7 +16,7 @@ source "amazon-ebs" "select-profile" {
 
 source "amazon-ebs" "ubuntu-22-04" {
   ami_name                     = "aws-dlami-autots-cpu"
-  instance_type                = "t3.2xlarge"
+  instance_type                = "m5.8xlarge"
   region                       = "eu-central-1"
   source_ami                   = "ami-065deacbcaac64cf2"
   ssh_username                 = "ubuntu"
@@ -43,6 +43,7 @@ build {
       "sudo bash /home/ubuntu/iot/experiments/setup_environment_cpu.sh",
       "export PATH=\"/home/ubuntu/.local/bin:$PATH\"",
       "python3 -m pip install --user pipenv",
+      "export TMPDIR=/home/ubuntu/",
       "pipenv install -v"
     ]
   }
