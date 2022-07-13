@@ -13,6 +13,7 @@ killall apt apt-get
 
 apt purge unattended-upgrades -y
 apt install software-properties-common -y
+apt install cmake -y
 
 add-apt-repository ppa:deadsnakes/ppa -y
 apt install python3.9 python3.9-dev -y
