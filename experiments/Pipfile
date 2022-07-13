@@ -30,6 +30,15 @@ arch = "*"
 tensorflow-cpu = "*"
 neuralprophet = "*"
 pytorch-forecasting = "*"
+statsmodels = "*"
+torch = "*"
+torchvision = "*"
+torchaudio = "*"
+scipy = "*"
+scikit-learn-intelex = "*"
+dill = "*"
+tqdm = "*"
+pmdarima = "*"
 
 [dev-packages]
 
