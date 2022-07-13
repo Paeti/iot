@@ -44,7 +44,7 @@ build {
       "export PATH=\"/home/ubuntu/.local/bin:$PATH\"",
       "python3 -m pip install --user pipenv",
       "export TMPDIR=/home/ubuntu/",
-      "pipenv install -v"
+      "pipenv run pip install --cache-dir=/home/ubuntu/ --build /home/ubuntu/"
     ]
   }
 
