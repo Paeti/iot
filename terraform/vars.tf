@@ -11,9 +11,13 @@ variable "environment" {
 }
 
 variable "instance_type" {
-  default = "p3.2xlarge"
+  default = "t3.2xlarge"
 }
 
 variable "service" {
   default = "jupyter"
+}
+
+variable "ami" {
+  default = 
 }

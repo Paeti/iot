@@ -35,6 +35,12 @@ torchaudio = "*"
 pytorch-forecasting = "*"
 neuralprophet = "*"
 autots = "*"
+torchmetrics = "==0.8.2"
+ujson = "*"
+cmdstanpy = "==0.9.68"
+pystan = "==2.19.1.1"
+prophet = "==1.0"
+tensorflow-probability = "*"
 
 [dev-packages]
 
