@@ -1,5 +1,5 @@
 variable "availability_zone" {
-  default = "eu-west-1c"
+  default = "eu-central-1c"
 }
 
 variable "contact" {
@@ -11,7 +11,7 @@ variable "environment" {
 }
 
 variable "instance_type" {
-  default = "t3.2xlarge"
+  default = "m5.4xlarge"
 }
 
 variable "service" {
@@ -19,5 +19,5 @@ variable "service" {
 }
 
 variable "ami" {
-  default = 
+  default = "ami-05a17b57c51529c38" 
 }
