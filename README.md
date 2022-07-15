@@ -1,3 +1,4 @@
+
 <p align="center"> 
   <img src="images/Project Logo.png" alt="HAR Logo" width="80px" height="80px">
 </p>
@@ -87,8 +88,6 @@ das die VM auf AWS Zugang zum Repository hat. Für Programmgesteuerten Zugriff b
 [Anleitung](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) zeigt, wie man einen SSH-Schlüssel erzeugt
 und zu seinem Github Repository hinzufügt 
 
-!!!!!!!!!!!!!!!! => fork von dem hier damit funzt?!?!?!!
-
 Packer bietet die Möglichkeit Anfragen an den SSH-Agenten der VM in der Cloud an den SSH-Agenten des Systemes 
 weiterzuleiten, von dem aus das Erzeugen des VM-Images gestartet wurde. Damit dies von Seiten des SSH-Clients erlaubt wird muss eine Konfiguration des Clients vorgenommen werden.
 Dazu muss in der Datei "~/.ssh/config" folgender Eintrag gespeichert werden:
@@ -130,11 +129,26 @@ und ohne Grafikkarte zur Verfügung. Das Template für die Maschiene mit Grafikk
 treten beim Modelltraining von Neuronalen Netzen jedoch schwerwiegende Fehler auf, die zum Trainingsabbruch führen. Aus diesem Grund wird empfohlen das CPU-Image 
 zu bauen und zu nutzen. Es wird jedoch gleichzeitig davon abgeraten die Neuronalen Netze mit Hilfe dieses VM-Images zu trainieren. Dies kann zu hohen AWS 
 Rechnungen führen!
+
+###  AWS-AMI mit Packer bauen
+
+Damit Packer sich mit Ihrer AWS-Cloud verbinden kann um das AMI zu bauen, sollte ihre Zugangsdaten für den einmaligen Befehl im Environment der Shell sein.
+
+```shell-session
+
+export AWS_ACCESS_KEY_ID="<YOUR_AWS_ACCESS_KEY_ID>"
+
+export AWS_SECRET_ACCESS_KEY="<YOUR_AWS_SECRET_ACCESS_KEY>"
+
+```
+
 Um das CPU-Image zu bauen muss als erstes in den entsprechenden Ordner gewechselt werden:
 
 ```bash
 cd packer/cpu
 ```
+
+
 
 In diesem Ordner befindet sich das zugehörige Template. Dieses kann ohne weitere Änderungen direkt benutzt werden. Zur Zeit das Template so eingestellt,
 dass zum erzeugen des Images eine m5.4xlarge Instanz auf AWS genutzt wird. Falls ein anderer Instanztyp genutzt werden soll kann dies über die Variable
@@ -175,6 +189,12 @@ Wenn die Erzeugung des Images abgeschlossen ist, bekommt man die AMI-ID des erze
 die AWS-Konsole unter dem EC2 Service und dem Punkt AMI nachschauen.
 Diese AMI-ID wird im nächsten Schritt genutzt werden, um mit diesem AMI eine VM auf AWS zuu starten.
 
+
+
+  
+
+###  Infrastruktur mit Terraform bauen
+
 Um Cloudressourcen zu starten und deren Lebenszyklus zu verwalten wird Terraform genutzt. Alle nötigen Templates für Terraform befinden sich im
 Ordner <repository-root>/terraform. Mit folgendem Befehl wechselt man vom Packer in den Terraform Ordner:
 
@@ -182,90 +202,114 @@ Ordner <repository-root>/terraform. Mit folgendem Befehl wechselt man vom Packer
 cd ../../terraform
 ```
 
+Damit Terraform sich mit Ihrer AWS-Instanz verbinden kann sollten Sie in Ihrem Home-Verzeichnis ein .aws-Ordner haben welcher in einer credentials-Datei Ihre Zugangsdaten so abspeichert.
+
+```txt
+
+[terraform]
+
+aws_access_key_id=<YOUR_AWS_ACCESS_KEY_ID>
+
+aws_secret_access_key=<YOUR_AWS_SECRET_ACCESS_KEY_ID>
+
+```
+
+
+
+Unter Zeile 18 des jeweiligen Packer-Skripts findet sich der gegebene AMI-Name.
+
+Dieser String soll nun von Ihnen in die Datei terraform/vars.tf bei Zeile 22 als default-Wert eingetragen werden.
+
+  
+
+Somit können Sie wenn Sie im terraform-Verzeichnis sind das Skript initialisieren mit
+
+```shell-session
+
+terraform init
+
+```
+
+und die Infrastruktur hochziehen mit
+
+```shell-session
+
+terraform apply
+
+```
+
+anschließend geben Sie "yes" in die Konsole und warten bis die Infrastruktur online ist.
+
+  
+
+cd /home/ubuntu/iot/experiments
+
+###  Verbinden zur VM über SSH
+
+In ihrem terraform-Verzeichnis ist nun nach ausführen des Skripts ein Schlüssel im PEM-Format generiert worden.
+
+Die machen Sie am besten über den Befehl
+
+```shell-session
+
+ssh -i "<key-name>.pem" ubuntu@<server-name>
+
+```
+
+Schlüssel und Servernamen entnehmen Sie aus dem Output des ausgeführten terraform-Skripts.
+
+Achten Sie dabei, dass die Berechtigungen des Schlüssels nicht zu Konflikten führen.
+
+  
+
+###  Starten des Trainings
+
+Sobald sie auf der VM über SSH eingeloggt sind gehen Sie in das Trainingsverzeichnis mit
+
+  
+
+```shell-session
+
+cd /home/ubuntu/iot/experiments
+
+```
+
+und starten schließlich das Training mit
+
+  
+
+```shell-session
+
+./start_training.sh
+
+```
+
+  
+
+Sobald das Training abgeschlossen ist schaltet sich der Server automatisch runter und
 
 
 
 
-<!-- ROADMAP -->
-<h2 id="roadmap"> Zukünftig</h2>
 
-<p align="justify"> 
-  Weiss et. al. has trained three models namely Decision Tree, k-Nearest Neighbors, and Random Forest for human activity classification by preprocessing the raw time series data using statistical feature extraction from segmented time series. 
-  The goals of this project include the following:
-<ol>
-  <li>
-    <p align="justify"> 
-      Train the same models - Decision Tree, k Nearest Neighbors, and Random Forest using the preprocessed data obtained from topological data analysis and compare the
-      performance against the results obtained by Weiss et. al.
-    </p>
-  </li>
-  <li>
-    <p align="justify"> 
-      Train SVM and CNN using the preprocessed data generated by Weiss et. al. and evaluate the performance against their Decision Tree, k Nearest Neighbors, and Random Forest models.
-    </p>
-  </li>
-</ol>
-</p>
-
-
-
-
-<!-- REFERENCES -->
-<h2 id="references"> References</h2>
-
-<ul>
-  <li>
-    <p>Matthew B. Kennel, Reggie Brown, and Henry D. I. Abarbanel. Determining embedding dimension for phase-space reconstruction using a geometrical construction. Phys. Rev. A, 45:3403–3411, Mar 1992.
-    </p>
-  </li>
-  <li>
-    <p>
-      L. M. Seversky, S. Davis, and M. Berger. On time-series topological data analysis: New data and opportunities. In 2016 IEEE Conference on Computer Vision and Pattern Recognition Workshops (CVPRW), pages 1014–1022, 2016.
-    </p>
-  </li>
-  <li>
-    <p>
-      Floris Takens. Detecting strange attractors in turbulence. In David Rand and Lai-Sang Young, editors, Dynamical Systems and Turbulence, Warwick 1980, pages 366–381, Berlin, Heidelberg, 1981. Springer Berlin Heidelberg.
-    </p>
-  </li>
-  <li>
-    <p>
-      Guillaume Tauzin, Umberto Lupo, Lewis Tunstall, Julian Burella P´erez, Matteo Caorsi, Anibal Medina-Mardones, Alberto Dassatti, and Kathryn Hess. giotto-tda: A topological data analysis toolkit for machine learning and data exploration, 2020.
-    </p>
-  </li>
-  <li>
-    <p>
-      G. M. Weiss and A. E. O’Neill. Smartphone and smartwatchbased activity recognition. Jul 2019.
-    </p>
-  </li>
-  <li>
-    <p>
-      G. M. Weiss, K. Yoneda, and T. Hayajneh. Smartphone and smartwatch-based biometrics using activities of daily living. IEEE Access, 7:133190–133202, 2019.
-    </p>
-  </li>
-  <li>
-    <p>
-      Jian-Bo Yang, Nguyen Nhut, Phyo San, Xiaoli li, and Priyadarsini Shonali. Deep convolutional neural networks on multichannel time series for human activity recognition. IJCAI, 07 2015.
-    </p>
-  </li>
-</ul>
 
 
 <!-- CONTRIBUTORS -->
 <h2 id="contributors">  Contributors</h2>
 
 <p>
-  :mortar_board: <i>All participants in this project are graduate students in the <a href="https://www.concordia.ca/ginacody/computer-science-software-eng.html">Department of Computer Science and Software Engineering</a> <b>@</b> <a href="https://www.concordia.ca/">Concordia University</a></i> <br> <br>
-  
+  :boy: <b>Patrick Reckeweg</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>patrick.reckeweg@stud.h-da.de</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/Paeti">@Paeti</a> <br>
 
-  :woman: <b>Mahsa Sadat Afzali Arani</b> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>m_afzali93@yahoo.com</a> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/MahsaAfzali">@MahsaAfzali</a> <br>
-
-  :boy: <b>Mohammad Amin Shamshiri</b> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>mohammadamin.shamshiri@mail.concordia.ca</a> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@ma-shamshiri</a> <br>
+  :boy: <b>Alfred Oshana</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>alfredashur.oshana@stud.h-da.de</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/oalfreda">@oalfreda</a> <br>
 </p>
 
+
+
 <br>
-✤ <i>This was the final project for the course COMP 6321 - Machine Learning (Fall 2020), at <a href="https://www.concordia.ca/">Concordia University</a><i>
+✤ <i>Eine Abschlussarbeit für den Kurs 22SS IoT Technologien an der <a href="https://h-da.de/">Hochschule Darmstadt</a><i>
+
+✤ <a href="https://github.com/ma-shamshiri">@ma-shamshiri</a> für die <a href="https://github.com/ma-shamshiri/Human-Activity-Recognition/blob/main/README.md">Markdown-Vorlage</a>
