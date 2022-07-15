@@ -1,0 +1,16 @@
+Model,occurence
+ARCH,2
+ARDL,2
+AverageValueNaive,2
+DatepartRegression,1
+ETS,5
+LastValueNaive,6
+NeuralProphet,1
+RollingRegression,10
+SeasonalNaive,1
+SectionalMotif,7
+Theta,16
+UnivariateMotif,18
+UnivariateRegression,4
+UnobservedComponents,5
+WindowRegression,12

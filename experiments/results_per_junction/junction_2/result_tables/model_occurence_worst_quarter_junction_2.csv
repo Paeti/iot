@@ -1,0 +1,15 @@
+Model,occurence
+ARCH,11
+ARDL,1
+AverageValueNaive,5
+ConstantNaive,7
+ETS,1
+FBProphet,10
+GLM,8
+GLS,12
+LastValueNaive,1
+MotifSimulation,16
+NeuralProphet,5
+SeasonalNaive,12
+UnivariateMotif,3
+UnivariateRegression,1

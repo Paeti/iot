@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 numpy = "*"
-pandas = "*"
+pandas = "==1.4.3"
 matplotlib = "*"
 sklearn = "*"
 jupyter = "*"

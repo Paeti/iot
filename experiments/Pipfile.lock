@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e21a1613f677e1e405669edeace70f3a8ba5dbd88955a31c6f4a4002ff8afa3b"
+            "sha256": "8bfa68b788ac3040a27d7673842e3f947910fc1833f766a39ad43fdd0996e23d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -845,11 +845,11 @@
         },
         "gluonts": {
             "hashes": [
-                "sha256:65aa1affe4ef6505c6d5c1e93469e7bbdae8c2c15abff80661617d557bdec7d5",
-                "sha256:ad8f99dea03c2447b1a35795c5a096fac9871ded03627568b616c4a32d6c2d98"
+                "sha256:4281ba730c15e82d03191479fcbf591491a9cf72842c35ceaea6744a44bb8e92",
+                "sha256:d2fa720f79342e17a542d439c01e2690acb7aacb4c3f122f065a841d19e9e0f5"
             ],
             "index": "pypi",
-            "version": "==0.10.1"
+            "version": "==0.10.2"
         },
         "google-auth": {
             "hashes": [
@@ -2645,11 +2645,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:16923d366ced322712c71ccb97164d07472abeecd13f3a6c283f6d5d26722793",
-                "sha256:db3b8e2f922b2a910a29804776c643ea609badb6a32c4bcc226fd4fd902cce65"
+                "sha256:0d33c374d41c7863419fc8f6c10bfe25b7b498aa34164d135c622e52580c6b16",
+                "sha256:c04b44a57a6265fe34a4a444e965884716d34bae963119a76353434d6f18e450"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==63.1.0"
+            "version": "==63.2.0"
         },
         "setuptools-git": {
             "hashes": [

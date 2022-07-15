@@ -1,0 +1,17 @@
+Model,occurence
+ARCH,5
+ARDL,2
+ARIMA,10
+AverageValueNaive,2
+ConstantNaive,7
+FBProphet,1
+GLM,5
+GLS,5
+MotifSimulation,14
+NVAR,6
+NeuralProphet,8
+RollingRegression,5
+SectionalMotif,8
+UnivariateMotif,1
+UnivariateRegression,7
+WindowRegression,7

@@ -1,0 +1,9 @@
+Model,occurence
+ARIMA,3
+DatepartRegression,13
+NeuralProphet,4
+RollingRegression,18
+SectionalMotif,18
+Theta,18
+UnivariateMotif,18
+UnivariateRegression,4

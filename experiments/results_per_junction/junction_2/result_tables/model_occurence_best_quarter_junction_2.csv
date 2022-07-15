@@ -1,0 +1,9 @@
+Model,occurence
+ARIMA,5
+DatepartRegression,19
+NeuralProphet,1
+RollingRegression,15
+SectionalMotif,19
+UnivariateMotif,15
+UnivariateRegression,5
+WindowRegression,14

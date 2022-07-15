@@ -1,0 +1,16 @@
+Model,occurence
+ARCH,3
+AverageValueNaive,1
+ConstantNaive,9
+DatepartRegression,2
+ETS,3
+FBProphet,12
+GLM,2
+GLS,12
+LastValueNaive,3
+MotifSimulation,15
+NVAR,9
+SeasonalNaive,11
+UnivariateRegression,1
+UnobservedComponents,3
+WindowRegression,10
